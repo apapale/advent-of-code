@@ -48,7 +48,7 @@ class PuzzleSolution(Puzzle):
             if self.data[r][c] == "A"
         )
 
-    def is_x_mas(self, r, c):
+    def is_x_mas(self, r: int, c: int) -> bool:
         """check if X-MAS appeaars"""
         return {self.data[r - 1][c - 1], self.data[r + 1][c + 1]} == _MS and {
             self.data[r - 1][c + 1],

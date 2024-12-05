@@ -21,14 +21,14 @@ class PuzzleSolution(Puzzle):
 
         self.updates = [list(map(int, line.split(","))) for line in self.data[_file_separator+1:]]
 
-    def _update_validation(self, update):
+    def _update_validation(self, update: list) -> bool:
         for i in range(len(update)):
             for j in range(i+1, len(update)):
                 if update[j] not in self.rules[update[i]]:
                     return False
         return True
 
-    def _sort_update(self, update):
+    def _sort_update(self, update: list) -> list:
         filtered_rules = {}
         for i in update:
             for subrule in self.rules[i]:
