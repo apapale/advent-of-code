@@ -14,7 +14,7 @@ class PuzzleSolution(Puzzle):
         self.rules = {}
         for line in self.data[:_file_separator]:
             a,b = map(int, line.split("|"))
-            if a not in self.rules.keys():
+            if a not in self.rules:
                 self.rules[a] = [b]
             else:
                 self.rules[a].append(b)
@@ -33,7 +33,7 @@ class PuzzleSolution(Puzzle):
         for i in update:
             for subrule in self.rules[i]:
                 if subrule in update:
-                    if i in filtered_rules.keys():
+                    if i in filtered_rules:
                         filtered_rules[i].append(subrule)
                     else:
                         filtered_rules[i] = [subrule]

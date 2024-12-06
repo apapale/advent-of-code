@@ -12,11 +12,6 @@ _MS = {"M", "S"}
 class PuzzleSolution(Puzzle):
     """Puzzle day 4"""
 
-    def __init__(self):
-        super().__init__()
-        self._nrows = len(self.data)
-        self._ncols = len(self.data[0])
-
     def solve_part1(self) -> int:
         """solve first part of the puzzle"""
         lines = self.data[:]
