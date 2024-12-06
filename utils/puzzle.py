@@ -9,6 +9,8 @@ class Puzzle(abc.ABC):
     def __init__(self):
         with open("input.txt", encoding="utf-8") as f:
             self.data = f.read().splitlines()
+        self._nrows = len(self.data)
+        self._ncols = len(self.data[0])
 
     @abc.abstractmethod
     def solve_part1(self) -> int:
