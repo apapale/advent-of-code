@@ -39,13 +39,6 @@ class PuzzleSolution(Puzzle):
             return test_value
         return 0
 
-    def _find_guard_pos(self) -> tuple:
-        """search for guard initial position"""
-        return None, None
-
-    def _guard_path(self, data: list) -> tuple:
-        """compute guard path and keeps track of visited sites"""
-
     def solve_part1(self) -> int:
         """solve first part of the puzzle"""
         return sum(
