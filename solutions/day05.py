@@ -13,17 +13,19 @@ class PuzzleSolution(Puzzle):
         _file_separator = self.data.index("")
         self.rules = {}
         for line in self.data[:_file_separator]:
-            a,b = map(int, line.split("|"))
+            a, b = map(int, line.split("|"))
             if a not in self.rules:
                 self.rules[a] = [b]
             else:
                 self.rules[a].append(b)
 
-        self.updates = [list(map(int, line.split(","))) for line in self.data[_file_separator+1:]]
+        self.updates = [
+            list(map(int, line.split(","))) for line in self.data[_file_separator + 1 :]
+        ]
 
     def _update_validation(self, update: list) -> bool:
         for i in range(len(update)):
-            for j in range(i+1, len(update)):
+            for j in range(i + 1, len(update)):
                 if update[j] not in self.rules[update[i]]:
                     return False
         return True
@@ -38,13 +40,18 @@ class PuzzleSolution(Puzzle):
                     else:
                         filtered_rules[i] = [subrule]
 
-        sorted_update = sorted(filtered_rules, key=lambda k: len(filtered_rules[k]), reverse=True)
+        sorted_update = sorted(
+            filtered_rules, key=lambda k: len(filtered_rules[k]), reverse=True
+        )
         return sorted_update
 
     def solve_part1(self) -> int:
         """solve first part of the puzzle"""
-        return sum(update[len(update) // 2] for update in self.updates if self._update_validation(update))
-        
+        return sum(
+            update[len(update) // 2]
+            for update in self.updates
+            if self._update_validation(update)
+        )
 
     def solve_part2(self) -> int:
         """solve second part of the puzzle"""

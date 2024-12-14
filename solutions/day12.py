@@ -50,19 +50,17 @@ class PuzzleSolution(Puzzle):
         """compute garden's area"""
         return len(garden[1])
 
+    def _compute_plant_perimeter(self, plant: list, garden: list):
+        """compute plant's perimeter"""
+        return 4 - sum(
+            1
+            for direction in _DIRECTIONS
+            if tuple(x + y for x, y in zip(plant, direction)) in garden[1]
+        )
+
     def _compute_perimeter(self, garden: list) -> int:
         """compute garden's perimeter"""
-        return sum(
-            (
-                4
-                - sum(
-                    1
-                    for direction in _DIRECTIONS
-                    if tuple(x + y for x, y in zip(plant, direction)) in garden[1]
-                )
-            )
-            for plant in garden[1]
-        )
+        return sum(self._compute_plant_perimeter(plant, garden) for plant in garden[1])
 
     def _compute_price(self, perimeter_sides_func: Callable) -> int:
         """compute garden's price"""
