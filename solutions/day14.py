@@ -2,11 +2,17 @@
 Advent of Code 2024 - Day 14
 """
 
-# from typing import Callable
 import matplotlib.pyplot as plt
 import numpy as np
 from utils import Puzzle
 
+def _multiple_vect(x, a):
+    """multiplay array for a scalar"""
+    return [x[0] * a, x[1] * a]
+
+def _sum_vect(a, b):
+    """sum two arrays element by element"""
+    return [x + y for x, y in zip(a, b)]
 
 class PuzzleSolution(Puzzle):
     """Puzzle day 14"""
@@ -23,14 +29,6 @@ class PuzzleSolution(Puzzle):
             vx, vy = map(int, vel[2:].split(","))
             self._robots.append(([x, y], [vx, vy]))
 
-    def _multiple_vect(self, x, a):
-        """multiplay array for a scalar"""
-        return [x[0] * a, x[1] * a]
-
-    def _sum_vect(self, a, b):
-        """sum two arrays element by element"""
-        return [x + y for x, y in zip(a, b)]
-
     def _pbc(self, pos):
         """rescale position inside box"""
         return [pos[0] % self._wide, pos[1] % self._tall]
@@ -39,7 +37,7 @@ class PuzzleSolution(Puzzle):
         """compute all robots final positions"""
         final_positions = []
         for pos, vel in robots:
-            x, y = self._pbc(self._sum_vect(pos, self._multiple_vect(vel, run_time)))
+            x, y = self._pbc(_sum_vect(pos, _multiple_vect(vel, run_time)))
             # remove if on central stripes
             if x == self._wide // 2 or y == self._tall // 2:
                 continue
