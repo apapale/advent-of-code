@@ -11,7 +11,7 @@ _SPLIT_SITES = {"#": ["#", "#"], "@": ["@", "."], "O": ["[", "]"], ".": [".", ".
 
 def _sum_list(a: list, b: list) -> list:
     """sum two list element by element"""
-    return [x + y for x, y in zip(a, b)]
+    return [_x + _y for _x, _y in zip(a, b)]
 
 
 class PuzzleSolution(Puzzle):
@@ -34,10 +34,10 @@ class PuzzleSolution(Puzzle):
             except ValueError:
                 return None
 
-        for y, line in enumerate(self._warehouse_map):
-            x = _find_robot_with_error(line)
-            if x is not None:
-                return [y, x]
+        for _y, line in enumerate(self._warehouse_map):
+            _x = _find_robot_with_error(line)
+            if _x is not None:
+                return [_y, _x]
         return [None, None]
 
     def _is_empty(self, pos: list) -> bool:
@@ -98,10 +98,10 @@ class PuzzleSolution(Puzzle):
                 )
                 robot_pos = new_robot_pos
         return sum(
-            100 * y + x
-            for y in range(self._nrows)
-            for x in range(self._ncols)
-            if self._is_box([y, x])
+            100 * _y + _x
+            for _y in range(self._nrows)
+            for _x in range(self._ncols)
+            if self._is_box([_y, _x])
         )
 
     def _move_robot(

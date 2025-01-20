@@ -25,12 +25,12 @@ class PuzzleSolution(Puzzle):
         """search initial and final position"""
         pos_start = None
         pos_end = None
-        for x, line in enumerate(self.data):
-            for y, m in enumerate(line):
-                if m == "S":
-                    pos_start = (x, y)
-                if m == "E":
-                    pos_end = (x, y)
+        for _x, _line in enumerate(self.data):
+            for _y, _m in enumerate(_line):
+                if _m == "S":
+                    pos_start = (_x, _y)
+                if _m == "E":
+                    pos_end = (_x, _y)
         return pos_start, pos_end
 
     def _is_free(self, pos: tuple) -> bool:

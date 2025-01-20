@@ -19,10 +19,10 @@ class PuzzleSolution(Puzzle):
     def _find_zeros(self) -> list:
         """search trailhead start"""
         return [
-            [c, r]
-            for c in range(self._nrows)
-            for r in range(self._ncols)
-            if self.data[c][r] == 0
+            [_c, _r]
+            for _c in range(self._nrows)
+            for _r in range(self._ncols)
+            if self.data[_c][_r] == 0
         ]
 
     def _check_in_map(self, pos: list) -> bool:
@@ -46,8 +46,8 @@ class PuzzleSolution(Puzzle):
     def _get_trailhead_value(self, zero_pos: list, select_trail) -> int:
         """compute score or rating"""
         trail_list = [zero_pos]
-        for n in range(1, 10):
-            trail_list = select_trail(trail_list, n)
+        for _n in range(1, 10):
+            trail_list = select_trail(trail_list, _n)
             if len(trail_list) == 0:
                 return 0
         return len(trail_list)

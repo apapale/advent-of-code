@@ -6,13 +6,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 from utils import Puzzle
 
+
 def _multiple_vect(x, a):
     """multiplay array for a scalar"""
     return [x[0] * a, x[1] * a]
 
+
 def _sum_vect(a, b):
     """sum two arrays element by element"""
-    return [x + y for x, y in zip(a, b)]
+    return [_x + _y for _x, _y in zip(a, b)]
+
 
 class PuzzleSolution(Puzzle):
     """Puzzle day 14"""
@@ -25,9 +28,9 @@ class PuzzleSolution(Puzzle):
         self._robots = []
         for line in self.data:
             pos, vel = line.split(" ")
-            x, y = map(int, pos[2:].split(","))
-            vx, vy = map(int, vel[2:].split(","))
-            self._robots.append(([x, y], [vx, vy]))
+            _x, _y = map(int, pos[2:].split(","))
+            _vx, _vy = map(int, vel[2:].split(","))
+            self._robots.append(([_x, _y], [_vx, _vy]))
 
     def _pbc(self, pos):
         """rescale position inside box"""
@@ -37,11 +40,11 @@ class PuzzleSolution(Puzzle):
         """compute all robots final positions"""
         final_positions = []
         for pos, vel in robots:
-            x, y = self._pbc(_sum_vect(pos, _multiple_vect(vel, run_time)))
+            _x, _y = self._pbc(_sum_vect(pos, _multiple_vect(vel, run_time)))
             # remove if on central stripes
-            if x == self._wide // 2 or y == self._tall // 2:
+            if _x == self._wide // 2 or _y == self._tall // 2:
                 continue
-            final_positions.append([x, y])
+            final_positions.append([_x, _y])
         return final_positions
 
     def solve_part1(self) -> int:
@@ -79,8 +82,8 @@ class PuzzleSolution(Puzzle):
         robots_np = np.zeros((self._wide, self._tall))
         plt.figure(figsize=(6, 6))
 
-        for x, y in final_positions:
-            robots_np[x][y] += 1
+        for _x, _y in final_positions:
+            robots_np[_x][_y] += 1
         ax = plt.subplot(1, 1, 1)
         ax.imshow(robots_np)
         plt.show()

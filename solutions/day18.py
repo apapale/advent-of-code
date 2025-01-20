@@ -71,7 +71,7 @@ class PuzzleSolution(Puzzle):
         """set up path collection and memory space"""
         self.path_collection = []
         self.memory_space = [
-            ["." for c in range(0, _NMAX + 1)] for r in range(0, _NMAX + 1)
+            ["." for _c in range(0, _NMAX + 1)] for _r in range(0, _NMAX + 1)
         ]
         for index in self.data[:max_index]:
             self.memory_space[index[1]][index[0]] = "#"

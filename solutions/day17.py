@@ -105,7 +105,7 @@ class PuzzleSolution(Puzzle):
                 # small a value affects first part of output, larger the last part
                 for i in range(len(self._output) - 1, -1, -1):
                     if self._output[i] != self._program[i]:
-                        a_value += 4**i
+                        a_value += 4 ** i
                         break
 
             if len(self._output) > len(self._program):

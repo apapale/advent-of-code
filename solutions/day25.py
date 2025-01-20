@@ -23,9 +23,7 @@ class PuzzleSolution(Puzzle):
         lock_heights = []
         keys_heights = []
         for schematic in schematics:
-            schematic_heights = [
-                line.count("#") - 1 for line in zip(*schematic)
-            ]
+            schematic_heights = [line.count("#") - 1 for line in zip(*schematic)]
             if schematic[0] == "#####" and schematic[-1] == ".....":
                 lock_heights.append(schematic_heights)
             elif schematic[-1] == "#####" and schematic[0] == ".....":

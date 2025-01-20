@@ -12,7 +12,7 @@ class PuzzleSolution(Puzzle):
     def solve_part1(self) -> int:
         """solve first part of the puzzle"""
         pattern = r"mul\((\d+),(\d+)\)"
-        return sum(int(a) * int(b) for a, b in findall(pattern, "".join(self.data)))
+        return sum(int(_a) * int(_b) for _a, _b in findall(pattern, "".join(self.data)))
 
     def solve_part2(self) -> int:
         """solve second part of the puzzle"""
@@ -20,10 +20,10 @@ class PuzzleSolution(Puzzle):
         pattern = r"mul\((\d+),(\d+)\)|(do\(\))|(don't\(\))"
         result = 0
 
-        for a, b, do, dont in findall(pattern, "".join(self.data)):
-            if do or dont:
-                enabled = bool(do)
+        for _a, _b, _do, _dont in findall(pattern, "".join(self.data)):
+            if _do or _dont:
+                enabled = bool(_do)
             else:
                 if enabled:
-                    result += int(a) * int(b)
+                    result += int(_a) * int(_b)
         return result

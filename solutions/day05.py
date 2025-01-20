@@ -13,20 +13,20 @@ class PuzzleSolution(Puzzle):
         _file_separator = self.data.index("")
         self.rules = {}
         for line in self.data[:_file_separator]:
-            a, b = map(int, line.split("|"))
-            if a not in self.rules:
-                self.rules[a] = [b]
+            _a, _b = map(int, line.split("|"))
+            if _a not in self.rules:
+                self.rules[_a] = [_b]
             else:
-                self.rules[a].append(b)
+                self.rules[_a].append(_b)
 
         self.updates = [
             list(map(int, line.split(","))) for line in self.data[_file_separator + 1 :]
         ]
 
     def _update_validation(self, update: list) -> bool:
-        for i in range(len(update)):
-            for j in range(i + 1, len(update)):
-                if update[j] not in self.rules[update[i]]:
+        for i, update_i in enumerate(update):
+            for update_j in update[i + 1 :]:
+                if update_j not in self.rules[update_i]:
                     return False
         return True
 

@@ -80,8 +80,8 @@ class PuzzleSolution(Puzzle):
         y_bin = "".join(
             [line.split(": ")[1] for line in self.input_wires if line.startswith("y")]
         )[::-1]
-        z = int(x_bin, 2) + int(y_bin, 2)
-        z_bin = bin(z)[2:][::-1]
+        _z = int(x_bin, 2) + int(y_bin, 2)
+        z_bin = bin(_z)[2:][::-1]
 
         swap_key = []
         result = []
@@ -91,9 +91,9 @@ class PuzzleSolution(Puzzle):
             z_test = bin(self.solve_part1())[2:][::-1]
             if z_bin == z_test:
                 break
-            for i, z_value in enumerate(z_bin):
-                if z_value != z_test[i] or len(swap_key) == 1:
-                    z_key = f"z{i:02}"
+            for _i, z_value in enumerate(z_bin):
+                if z_value != z_test[_i] or len(swap_key) == 1:
+                    z_key = f"z{_i:02}"
                     input_1, gate, input_2 = self.gates[z_key]
                     for input_a, input_b in [(input_1, input_2), (input_2, input_1)]:
                         if len(swap_key) == 2:

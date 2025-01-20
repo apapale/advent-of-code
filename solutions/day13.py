@@ -29,7 +29,7 @@ class PuzzleSolution(Puzzle):
 
     def _sum_button(self, a, b):
         """sum tuples"""
-        return tuple(x + y for x, y in zip(a, b))
+        return tuple(_x + _y for _x, _y in zip(a, b))
 
     def _cross_prod(self, a, b):
         """cross product of tuples"""
@@ -40,12 +40,12 @@ class PuzzleSolution(Puzzle):
         self.data.append(" ")
         max_token = 100
         cost = 0
-        for x, y, z, _ in self._chunker(self.data, 4):
-            a = self._get_x_y_move(x)
-            b = self._get_x_y_move(y)
-            p = self._get_x_y_price(z)
-            b_times = self._cross_prod(a, p) / self._cross_prod(a, b)
-            a_times = (p[0] - b[0] * b_times) / a[0]
+        for _x, _y, _z, _ in self._chunker(self.data, 4):
+            _a = self._get_x_y_move(_x)
+            _b = self._get_x_y_move(_y)
+            _p = self._get_x_y_price(_z)
+            b_times = self._cross_prod(_a, _p) / self._cross_prod(_a, _b)
+            a_times = (_p[0] - _b[0] * b_times) / _a[0]
             if (
                 max_token >= a_times >= 0
                 and max_token >= b_times >= 0
@@ -59,13 +59,13 @@ class PuzzleSolution(Puzzle):
         """solve second part of the puzzle"""
         max_token = 10000000000000
         cost = 0
-        for x, y, z, _ in self._chunker(self.data, 4):
-            a = self._get_x_y_move(x)
-            b = self._get_x_y_move(y)
-            p = self._get_x_y_price(z)
-            p = self._sum_button(p, (max_token, max_token))
-            b_times = self._cross_prod(a, p) / self._cross_prod(a, b)
-            a_times = (p[0] - b[0] * b_times) / a[0]
+        for _x, _y, _z, _ in self._chunker(self.data, 4):
+            _a = self._get_x_y_move(_x)
+            _b = self._get_x_y_move(_y)
+            _p = self._get_x_y_price(_z)
+            _p = self._sum_button(_p, (max_token, max_token))
+            b_times = self._cross_prod(_a, _p) / self._cross_prod(_a, _b)
+            a_times = (_p[0] - _b[0] * b_times) / _a[0]
             if (
                 max_token >= a_times >= 0
                 and max_token >= b_times >= 0

@@ -16,7 +16,7 @@ class PuzzleSolution(Puzzle):
         self.data = [list(line) for line in self.data]
         self.regions = []
         self.assigned = [
-            [False for n in range(self._ncols)] for n in range(self._nrows)
+            [False for _n in range(self._ncols)] for _n in range(self._nrows)
         ]
 
     def _check_in_map(self, pos: tuple) -> bool:
@@ -26,7 +26,7 @@ class PuzzleSolution(Puzzle):
     def _check_neighbours(self, r: int, c: int, plant_type: str) -> None:
         """check if all the neighbours are in the same garden"""
         for direction in _DIRECTIONS:
-            new_r, new_c = tuple(x + y for x, y in zip((r, c), direction))
+            new_r, new_c = tuple(_x + _y for _x, _y in zip((r, c), direction))
             if (
                 self._check_in_map((new_r, new_c))
                 and self.data[new_r][new_c] == plant_type
@@ -38,13 +38,13 @@ class PuzzleSolution(Puzzle):
 
     def _compute_gardens(self) -> None:
         """compute all gardens from data"""
-        for r in range(self._nrows):
-            for c in range(self._ncols):
-                if self.assigned[r][c] is False:
-                    plant_type = self.data[r][c]
-                    self.regions.append([plant_type, [(r, c)]])
-                    self.assigned[r][c] = True
-                    self._check_neighbours(r, c, plant_type)
+        for _r in range(self._nrows):
+            for _c in range(self._ncols):
+                if self.assigned[_r][_c] is False:
+                    plant_type = self.data[_r][_c]
+                    self.regions.append([plant_type, [(_r, _c)]])
+                    self.assigned[_r][_c] = True
+                    self._check_neighbours(_r, _c, plant_type)
 
     def _compute_area(self, garden: list) -> int:
         """compute garden's area"""
@@ -55,7 +55,7 @@ class PuzzleSolution(Puzzle):
         return 4 - sum(
             1
             for direction in _DIRECTIONS
-            if tuple(x + y for x, y in zip(plant, direction)) in garden[1]
+            if tuple(_x + _y for _x, _y in zip(plant, direction)) in garden[1]
         )
 
     def _compute_perimeter(self, garden: list) -> int:
@@ -79,7 +79,7 @@ class PuzzleSolution(Puzzle):
         segments = []
         for plant in garden[1]:
             for direction in _DIRECTIONS:
-                neigh = tuple(x + y for x, y in zip(plant, direction))
+                neigh = tuple(_x + _y for _x, _y in zip(plant, direction))
                 if neigh not in garden[1]:
                     segments.append([plant, neigh])
         return segments
@@ -88,23 +88,23 @@ class PuzzleSolution(Puzzle):
         """compute if segments belong to the same side"""
         segments = self._compute_segments(garden)
         count_sides = 0
-        for i, i_segment in enumerate(segments):
-            x, y = i_segment
+        for _i, i_segment in enumerate(segments):
+            _x, _y = i_segment
             direction = None
             other_dir = None
-            for k in [0, 1]:
-                if x[k] == y[k]:
-                    direction = k
+            for _k in [0, 1]:
+                if _x[_k] == _y[_k]:
+                    direction = _k
                 else:
-                    other_dir = k
-            for _, j_segment in enumerate(segments[i + 1 :], start=i + 1):
-                m, n = j_segment
-                if m[direction] == n[direction]:
-                    dx = x[direction] - m[direction]
+                    other_dir = _k
+            for _, j_segment in enumerate(segments[_i + 1 :], start=_i + 1):
+                _m, _n = j_segment
+                if _m[direction] == _n[direction]:
+                    _dx = _x[direction] - _m[direction]
                     if (
-                        dx in (1, -1)
-                        and x[other_dir] == m[other_dir]
-                        and y[other_dir] == n[other_dir]
+                        _dx in (1, -1)
+                        and _x[other_dir] == _m[other_dir]
+                        and _y[other_dir] == _n[other_dir]
                     ):
                         count_sides -= 1
             count_sides += 1

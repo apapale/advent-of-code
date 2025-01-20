@@ -25,10 +25,10 @@ class PuzzleSolution(Puzzle):
             except ValueError:
                 return None
 
-        for y, line in enumerate(self.data):
-            x = _find_guard_pos_with_error(line)
-            if x is not None:
-                return y, x
+        for _y, line in enumerate(self.data):
+            _x = _find_guard_pos_with_error(line)
+            if _x is not None:
+                return _y, _x
         return None, None
 
     def _guard_path(self, data: list) -> tuple:

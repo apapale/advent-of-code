@@ -25,10 +25,10 @@ class PuzzleSolution(Puzzle):
             r + c: [] for r in range(self._nrows) for c in range(self._ncols)
         }
 
-        for r in range(self._nrows):
-            for c in range(self._ncols):
-                diagonals[r - c].append(self.data[r][c])
-                antidiagonals[r + c].append(self.data[r][c])
+        for _r in range(self._nrows):
+            for _c in range(self._ncols):
+                diagonals[_r - _c].append(self.data[_r][_c])
+                antidiagonals[_r + _c].append(self.data[_r][_c])
 
         lines.extend(["".join(subdiagonal) for subdiagonal in diagonals.values()])
         lines.extend(["".join(subdiagonal) for subdiagonal in antidiagonals.values()])
@@ -37,10 +37,10 @@ class PuzzleSolution(Puzzle):
     def solve_part2(self) -> int:
         """solve second part of the puzzle"""
         return sum(
-            self.is_x_mas(r, c)
-            for r in range(1, self._nrows - 1)
-            for c in range(1, self._ncols - 1)
-            if self.data[r][c] == "A"
+            self.is_x_mas(_r, _c)
+            for _r in range(1, self._nrows - 1)
+            for _c in range(1, self._ncols - 1)
+            if self.data[_r][_c] == "A"
         )
 
     def is_x_mas(self, r: int, c: int) -> bool:
